@@ -39,6 +39,11 @@ const HomePage: React.FC = () => {
               </InputAdornment>
             ),
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
       </div>
     </Container>
