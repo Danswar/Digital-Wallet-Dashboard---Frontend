@@ -2,7 +2,7 @@ export function formatNumber(input: string) {
   const num = parseFloat(input);
 
   if (isNaN(num) || !isFinite(num)) {
-    return input;
+    return 0;
   }
 
   const roundedNum = +num.toFixed(
