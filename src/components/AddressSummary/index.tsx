@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import { ArrowBack, Star, StarBorder } from "@mui/icons-material";
+import { Box, Card, Container, Typography } from "@mui/material";
 import { formatNumber } from "../../utils/formatNumber";
 
 type AddressSummaryProps = {
@@ -16,30 +8,14 @@ type AddressSummaryProps = {
     balance: string;
     isFavorite: boolean;
   };
-  handleOnFavorite: () => void;
-  handleGoBack: () => void;
 };
 
 const AddressSummary: React.FC<AddressSummaryProps> = ({
   walletAddress,
   addressDetails,
-  handleOnFavorite,
-  handleGoBack,
 }) => {
   return (
     <Container>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Button variant="text" onClick={handleGoBack}>
-          <ArrowBack /> Go Back
-        </Button>
-        <IconButton onClick={handleOnFavorite}>
-          {addressDetails?.isFavorite ? (
-            <Star fontSize="large" />
-          ) : (
-            <StarBorder fontSize="large" />
-          )}
-        </IconButton>
-      </Box>
       <Typography variant="h1">
         {formatNumber(addressDetails?.balance || "")} ETH
       </Typography>
