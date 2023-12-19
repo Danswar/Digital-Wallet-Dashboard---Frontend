@@ -15,26 +15,35 @@ const AddressSummary: React.FC<AddressSummaryProps> = ({
   addressDetails,
 }) => {
   return (
-    <Container>
-      <Typography variant="h1">
+    <Container sx={{ textAlign: "center" }}>
+      <Typography variant="h2">
         {formatNumber(addressDetails?.balance || "")} ETH
       </Typography>
-      <Typography variant="h5">{walletAddress}</Typography>
-      <Card>
-        <Typography variant="h5">Valuation</Typography>
-        <Box sx={{ display: "flex" }}>
-          <Typography variant="h5">Currency:</Typography>
-          <Typography variant="h5">USD</Typography>
-        </Box>
-        <Box sx={{ display: "flex" }}>
-          <Typography variant="h5">Price:</Typography>
-          <Typography variant="h5">2200 USD/ETH</Typography>
-        </Box>
-        <Box sx={{ display: "flex" }}>
-          <Typography variant="h5">Total:</Typography>
-          <Typography variant="h5">440000 USD</Typography>
-        </Box>
-      </Card>
+      <Typography variant="subtitle1">{walletAddress}</Typography>
+      <Container>
+        <Card
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            padding: "1rem",
+          }}
+        >
+          <Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h5">Currency: </Typography>
+              <Typography variant="h5">USD</Typography>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h5">Price: </Typography>
+              <Typography variant="h5">2200 USD/ETH</Typography>
+            </Box>
+          </Box>
+          <Box>
+            <Typography variant="h5">Total:</Typography>
+            <Typography variant="h5">440000 USD</Typography>
+          </Box>
+        </Card>
+      </Container>
     </Container>
   );
 };

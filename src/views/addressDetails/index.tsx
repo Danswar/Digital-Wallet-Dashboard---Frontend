@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
-import MainAppBar from "../../components/MainAppBar";
+import { Container } from "@mui/material";
 import AddressSummary from "../../components/AddressSummary";
 import GoBackButton from "../../components/GoBackButton";
 import FavoriteButton from "../../components/FavoriteButton";
 import useSearchAddressDetails from "../../hooks/useSearchAddressDetails";
+import AppLayout from "../../components/AppLayout";
+import ActionButtons from "../../components/ActionButton";
 
 const AddressDetails: React.FC = () => {
   const { walletAddress } = useParams();
@@ -13,19 +14,19 @@ const AddressDetails: React.FC = () => {
   );
 
   return (
-    <>
-      <MainAppBar />
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+    <AppLayout>
+      <Container sx={{ display: "flex", justifyContent: "space-between" }}>
         <GoBackButton />
         <FavoriteButton address={walletAddress!} iconFontSize="large" />
-      </Box>
+      </Container>
       {!isLoading && (
         <AddressSummary
           walletAddress={walletAddress!}
           addressDetails={addressOnChainDetails}
         />
       )}
-    </>
+      <ActionButtons address={walletAddress!} />
+    </AppLayout>
   );
 };
 
