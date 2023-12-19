@@ -1,6 +1,10 @@
 import React from "react";
 import { Box, Card, Container, Typography } from "@mui/material";
 import { formatNumber } from "../../utils/formatNumber";
+import CurrencySelector from "../CurrencySelector";
+import PriceInput from "../PriceInput";
+import useCurrencyPreferences from "../../hooks/useCurrencyPreferences";
+import useMarketPrice from "../../hooks/useMarketPrice";
 
 type AddressSummaryProps = {
   walletAddress: string;
@@ -14,6 +18,21 @@ const AddressSummary: React.FC<AddressSummaryProps> = ({
   walletAddress,
   addressDetails,
 }) => {
+  const { currency, price, setPrice, setCurrency } = useCurrencyPreferences();
+  const { marketPrice, isLoading } = useMarketPrice();
+
+  const refreshFromMarket = () => {
+    if (isLoading) return;
+    const currentPrice = marketPrice[currency];
+    setPrice(Number(currentPrice));
+  };
+
+  const getTotalValuation = () => {
+    if (!addressDetails?.balance) return 0;
+    const result = Number(price) * Number(addressDetails?.balance);
+    return formatNumber(result);
+  };
+
   return (
     <Container sx={{ textAlign: "center" }}>
       <Typography variant="h2">
@@ -28,19 +47,20 @@ const AddressSummary: React.FC<AddressSummaryProps> = ({
             padding: "1rem",
           }}
         >
-          <Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Currency: </Typography>
-              <Typography variant="h5">USD</Typography>
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Price: </Typography>
-              <Typography variant="h5">2200 USD/ETH</Typography>
-            </Box>
-          </Box>
+          <CurrencySelector
+            currency={currency}
+            onCurrencyChange={setCurrency}
+          />
+          <PriceInput
+            price={price}
+            setPrice={setPrice}
+            onRefresh={refreshFromMarket}
+          />
           <Box>
             <Typography variant="h5">Total:</Typography>
-            <Typography variant="h5">440000 USD</Typography>
+            <Typography variant="h5">
+              {getTotalValuation()} {currency.toLocaleUpperCase()}
+            </Typography>
           </Box>
         </Card>
       </Container>

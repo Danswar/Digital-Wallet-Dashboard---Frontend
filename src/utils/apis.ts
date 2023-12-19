@@ -60,3 +60,9 @@ export const deleteTrackedWallet = async ({ address }) => {
   const data = await response.json();
   return data;
 };
+
+export const fetchMarketPrice = async () => {
+  const response = await fetch(`${API_HOST}/price/ethereum`);
+  const data = await response.json();
+  return data;
+};
