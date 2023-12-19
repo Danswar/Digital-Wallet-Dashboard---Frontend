@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
-import SearchAppBar from "../../components/SearchAppBar";
+import MainAppBar from "../../components/MainAppBar";
 import AddressSummary from "../../components/AddressSummary";
 import GoBackButton from "../../components/GoBackButton";
 import FavoriteButton from "../../components/FavoriteButton";
@@ -14,7 +14,7 @@ const AddressDetails: React.FC = () => {
 
   return (
     <>
-      <SearchAppBar />
+      <MainAppBar />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <GoBackButton />
         <FavoriteButton address={walletAddress!} iconFontSize="large" />

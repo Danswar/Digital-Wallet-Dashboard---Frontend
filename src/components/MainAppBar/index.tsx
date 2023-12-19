@@ -6,7 +6,11 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchInputBar from "../SearchInputBar";
 
-export default function SearchAppBar() {
+export default function MainAppBar({
+  showSearchInput = true,
+}: {
+  showSearchInput?: boolean;
+}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -19,7 +23,7 @@ export default function SearchAppBar() {
           >
             Digital Wallet
           </Typography>
-          <SearchInputBar />
+          {showSearchInput && <SearchInputBar />}
           <IconButton
             size="large"
             edge="start"
