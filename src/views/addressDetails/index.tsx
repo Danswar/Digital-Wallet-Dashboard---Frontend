@@ -1,42 +1,28 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Box } from "@mui/material";
 import SearchAppBar from "../../components/SearchAppBar";
-import useSearchAddressDetails from "../../hooks/useSearchAddressDetails";
 import AddressSummary from "../../components/AddressSummary";
-
-type AddressDetailsDTO = {
-  balance: string;
-  firstTxSeen: {
-    timestamp: string;
-    hash: string;
-  };
-  isFavorite: boolean;
-};
+import GoBackButton from "../../components/GoBackButton";
+import FavoriteButton from "../../components/FavoriteButton";
+import useSearchAddressDetails from "../../hooks/useSearchAddressDetails";
 
 const AddressDetails: React.FC = () => {
   const { walletAddress } = useParams();
-  const result = useSearchAddressDetails(walletAddress!);
-  const {
-    isLoading,
-    data: addressDetails,
-  }: { isLoading: boolean; data?: AddressDetailsDTO } = result;
-
-  const navigate = useNavigate();
-
-  const handleOnFavorite = () => {};
-
-  const handleGoBack = () => {
-    navigate("/");
-  };
+  const { isLoading, addressOnChainDetails } = useSearchAddressDetails(
+    walletAddress!
+  );
 
   return (
     <>
       <SearchAppBar />
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <GoBackButton />
+        <FavoriteButton address={walletAddress!} iconFontSize="large" />
+      </Box>
       {!isLoading && (
         <AddressSummary
           walletAddress={walletAddress!}
-          addressDetails={addressDetails}
-          handleGoBack={handleGoBack}
-          handleOnFavorite={handleOnFavorite}
+          addressDetails={addressOnChainDetails}
         />
       )}
     </>

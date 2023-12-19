@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import Container from "@mui/material/Container";
 import {
   Typography,
   TextField,
   InputAdornment,
   IconButton,
+  Container,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 const HomePage: React.FC = () => {
   const [address, setAddress] = useState("");
   const navigate = useNavigate();
+  useUser();
 
   const handleSearch = () => {
     if (address === "") return;

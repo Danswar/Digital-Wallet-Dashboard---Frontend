@@ -7,10 +7,12 @@ const fetchAddressDetails = async (address: string) => {
 };
 
 const useSearchAddressDetails = (address: string) => {
-  return useQuery({
+  const { data, ...rest } = useQuery({
     queryKey: [`searchAddress-${address}`],
     queryFn: () => fetchAddressDetails(address),
   });
+
+  return { addressOnChainDetails: data, ...rest };
 };
 
 export default useSearchAddressDetails;
