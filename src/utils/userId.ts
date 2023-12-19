@@ -2,7 +2,7 @@
 // The idea is to upgrade this to a JWT token in the future
 
 export const getUserId = () => {
-  const userId = sessionStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
   if (userId) {
     return userId;
   }
@@ -10,5 +10,5 @@ export const getUserId = () => {
 };
 
 export const setUserId = (userId: string) => {
-  sessionStorage.setItem("userId", userId);
+  localStorage.setItem("userId", userId);
 };
