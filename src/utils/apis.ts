@@ -1,6 +1,12 @@
-import { getUserId } from "../../utils/userId";
+import { getUserId } from "./userId";
 
 const API_HOST = "http://localhost:3000";
+
+export const fetchAddressDetails = async (address: string) => {
+  const response = await fetch(`${API_HOST}/addresses/${address}`);
+  const data = await response.json();
+  return data;
+};
 
 export const fetchTrackedWallets = async () => {
   const response = await fetch(`${API_HOST}/tracked-wallets/`, {

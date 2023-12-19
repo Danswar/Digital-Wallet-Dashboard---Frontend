@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getUserId, setUserId } from "../utils/userId";
 
 const fetchUser = async () => {
-  const response = await fetch(`http://localhost:3000/user-preferences`, {
+  const response = await fetch(`http://localhost:3000/user`, {
     mode: "cors",
     headers: {
       "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import { Star, StarBorder } from "@mui/icons-material";
-import { useSingleTrackedWallet } from "../../hooks/trackedWallets/useSingleTrackedWallet";
+import { useSingleTrackedWallet } from "../../hooks/useSingleTrackedWallet";
 
 type FavoriteButtonProps = {
   address: string;

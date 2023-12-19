@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchTrackedWallets } from "./apis";
+import { fetchTrackedWallets } from "../utils/apis";
 
 const QUERY_KEY = "tracked-wallets";
 const useTrackedWallets = () => {

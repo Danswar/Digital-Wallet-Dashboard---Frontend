@@ -1,5 +1,5 @@
 import React from "react";
-import { useSingleTrackedWallet } from "../../hooks/trackedWallets/useSingleTrackedWallet";
+import { useSingleTrackedWallet } from "../../hooks/useSingleTrackedWallet";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -12,7 +12,7 @@ const CenteredContainer = styled(Box)(() => ({
 }));
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ address }) => {
-  const { walletData, isLoading, toogleFavorite } =
+  const { isTracked, isLoading, trackWallet, untrackWallet } =
     useSingleTrackedWallet(address);
 
   if (isLoading)
@@ -22,22 +22,25 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ address }) => {
       </CenteredContainer>
     );
 
-  return (
-    <CenteredContainer>
-      {!walletData ? (
-        <Button size="large" onClick={toogleFavorite} variant="contained">
+  if (!isTracked)
+    return (
+      <CenteredContainer>
+        <Button size="large" onClick={trackWallet} variant="contained">
           Track this wallet
         </Button>
-      ) : (
-        <Button
-          size="large"
-          onClick={toogleFavorite}
-          variant="outlined"
-          color="error"
-        >
-          Untrack this wallet
-        </Button>
-      )}
+      </CenteredContainer>
+    );
+
+  return (
+    <CenteredContainer>
+      <Button
+        size="large"
+        onClick={untrackWallet}
+        variant="outlined"
+        color="error"
+      >
+        Untrack this wallet
+      </Button>
     </CenteredContainer>
   );
 };
