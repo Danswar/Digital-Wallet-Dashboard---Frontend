@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, Container, Typography } from "@mui/material";
+import { Alert, Box, Card, Container, Typography } from "@mui/material";
 import { formatNumber } from "../../utils/formatNumber";
 import CurrencySelector from "../CurrencySelector";
 import PriceInput from "../PriceInput";
@@ -11,6 +11,9 @@ type AddressSummaryProps = {
   addressDetails?: {
     balance: string;
     isFavorite: boolean;
+    firstTxSeen: {
+      timestamp: string;
+    };
   };
 };
 
@@ -33,6 +36,17 @@ const AddressSummary: React.FC<AddressSummaryProps> = ({
     return formatNumber(result);
   };
 
+  const getIsOldWallet = () => {
+    if (!addressDetails?.firstTxSeen) return false;
+    const firstTxDate = new Date(
+      Number(addressDetails?.firstTxSeen.timestamp) * 1000
+    );
+    const currentDate = new Date();
+    const diffTime = Math.abs(currentDate.getTime() - firstTxDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 365;
+  };
+
   return (
     <Container sx={{ textAlign: "center" }}>
       <Typography variant="h2">
@@ -40,6 +54,11 @@ const AddressSummary: React.FC<AddressSummaryProps> = ({
       </Typography>
       <Typography variant="subtitle1">{walletAddress}</Typography>
       <Container>
+        {getIsOldWallet() && (
+          <Alert sx={{ marginBottom: "1rem" }} severity="warning">
+            This wallet is old
+          </Alert>
+        )}
         <Card
           sx={{
             display: "flex",
