@@ -3,14 +3,17 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchInputBar from "../SearchInputBar";
+import { WalletOutlined } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export default function MainAppBar({
   showSearchInput = true,
 }: {
   showSearchInput?: boolean;
 }) {
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -30,8 +33,9 @@ export default function MainAppBar({
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={() => navigate("/my-wallets")}
           >
-            <MenuIcon />
+            <WalletOutlined />
           </IconButton>
         </Toolbar>
       </AppBar>
