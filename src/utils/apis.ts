@@ -1,6 +1,23 @@
-import { getUserId } from "./userId";
+import { getUserId, setUserId } from "./userId";
 
 const API_HOST = "http://localhost:3000";
+
+export const fetchUser = async () => {
+  const response = await fetch(`${API_HOST}/user`, {
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      ...(getUserId() && { "X-User-Id": getUserId() }),
+    },
+  });
+
+  const data = await response.json();
+  if (data.id) {
+    setUserId(data.id);
+  }
+
+  return data;
+};
 
 export const fetchAddressDetails = async (address: string) => {
   const response = await fetch(`${API_HOST}/addresses/${address}`);
