@@ -44,7 +44,7 @@ const WalletsTable: React.FC<WalletsTableProps> = ({ addresses }) => {
               <FormControlLabel
                 control={
                   <Switch
-                    value={setSortByFavorite}
+                    checked={sortByFavorite}
                     onChange={handleSortByFavorite}
                   />
                 }
@@ -54,21 +54,22 @@ const WalletsTable: React.FC<WalletsTableProps> = ({ addresses }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {[...addresses]
-            .sort(sortByFavorite ? byFavorite : byDefault)
-            .map(({ address }) => (
-              <TableRow key={address}>
-                <TableCell>
-                  <FavoriteButton address={address} iconFontSize="small" />
-                </TableCell>
-                <TableCell>{address}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => navigate(`/${address}`)}>
-                    <QueryStats />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+          {!!addresses.length &&
+            [...addresses]
+              .sort(sortByFavorite ? byFavorite : byDefault)
+              .map(({ address }) => (
+                <TableRow key={address}>
+                  <TableCell>
+                    <FavoriteButton address={address} iconFontSize="small" />
+                  </TableCell>
+                  <TableCell>{address}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => navigate(`/${address}`)}>
+                      <QueryStats />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
     </TableContainer>
