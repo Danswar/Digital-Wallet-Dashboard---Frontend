@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Container } from "@mui/material";
+import { CircularProgress, Container } from "@mui/material";
 import AddressSummary from "../../components/AddressSummary";
 import GoBackButton from "../../components/GoBackButton";
 import FavoriteButton from "../../components/FavoriteButton";
@@ -19,13 +19,17 @@ const AddressDetails: React.FC = () => {
         <GoBackButton />
         <FavoriteButton address={walletAddress!} iconFontSize="large" />
       </Container>
-      {!isLoading && (
-        <AddressSummary
-          walletAddress={walletAddress!}
-          addressDetails={addressOnChainDetails}
-        />
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <AddressSummary
+            walletAddress={walletAddress!}
+            addressDetails={addressOnChainDetails}
+          />
+          <ActionButtons address={walletAddress!} />
+        </>
       )}
-      <ActionButtons address={walletAddress!} />
     </AppLayout>
   );
 };

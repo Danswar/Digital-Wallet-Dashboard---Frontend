@@ -1,6 +1,6 @@
 import { getUserId, setUserId } from "./userId";
 
-const API_HOST = "http://localhost:3000";
+const API_HOST = "http://ec2-52-91-25-151.compute-1.amazonaws.com:3000";
 
 export const fetchUser = async () => {
   const response = await fetch(`${API_HOST}/user`, {
