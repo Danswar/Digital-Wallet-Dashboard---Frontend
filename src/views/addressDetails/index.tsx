@@ -20,7 +20,9 @@ const AddressDetails: React.FC = () => {
         <FavoriteButton address={walletAddress!} iconFontSize="large" />
       </Container>
       {isLoading ? (
-        <CircularProgress />
+        <Container sx={{ display: "flex", justifyContent: "center" }}>
+          <CircularProgress />
+        </Container>
       ) : (
         <>
           <AddressSummary

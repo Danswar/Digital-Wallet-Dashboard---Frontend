@@ -37,7 +37,11 @@ export const fetchTrackedWallets = async () => {
   return data;
 };
 
-export const fetchSingleTrackedWallet = async ({ address }) => {
+export const fetchSingleTrackedWallet = async ({
+  address,
+}: {
+  address: string;
+}) => {
   const response = await fetch(`${API_HOST}/tracked-wallets/${address}`, {
     mode: "cors",
     headers: {
@@ -49,7 +53,13 @@ export const fetchSingleTrackedWallet = async ({ address }) => {
   return data;
 };
 
-export const upsertTrackedWallet = async ({ address, isFavorite }) => {
+export const upsertTrackedWallet = async ({
+  address,
+  isFavorite,
+}: {
+  address: string;
+  isFavorite: boolean;
+}) => {
   const response = await fetch(`${API_HOST}/tracked-wallets/`, {
     method: "POST",
     mode: "cors",
@@ -64,7 +74,7 @@ export const upsertTrackedWallet = async ({ address, isFavorite }) => {
   return data;
 };
 
-export const deleteTrackedWallet = async ({ address }) => {
+export const deleteTrackedWallet = async ({ address }: { address: string }) => {
   const response = await fetch(`${API_HOST}/tracked-wallets/${address}`, {
     method: "DELETE",
     mode: "cors",
